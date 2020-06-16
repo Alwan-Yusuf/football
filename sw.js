@@ -8,6 +8,7 @@ var urlsToCache = [
     '/icon.png',
     '/css/materialize.min.css',
     '/js/materialize.min.js',
+    '/detil.html',
     '/js/nav.js',
     '/main.js',
     '/idb.js',
