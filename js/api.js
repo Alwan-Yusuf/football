@@ -25,10 +25,10 @@ function getCompetitions(){
             data.competitions.forEach(function(competition){
                 if(competition.id === 2000 || competition.id === 2001 || competition.id === 2002 || competition.id === 2003 || competition.id === 2013 || competition.id === 2014 || competition.id === 2015 || competition.id === 2016 || competition.id === 2017 || competition.id === 2018 || competition.id === 2019 || competition.id === 2021 ){
                     html = `
-                        <div class="col-3 mb-3">
+                        <div class="col s12 m6 l3 mb-3">
                             <div class="card">
                                 <a href="competition.html?id=${competition.id}">
-                                    <div class="card-body">
+                                    <div class="card-content">
                                         <p>${competition.name}</p>
                                     </div>
                                 </a>
@@ -46,10 +46,10 @@ function getCompetitions(){
             data.competitions.forEach(function(competition){
                 if(competition.id === 2000 || competition.id === 2001 || competition.id === 2002 || competition.id === 2003 || competition.id === 2013 || competition.id === 2014 || competition.id === 2015 || competition.id === 2016 || competition.id === 2017 || competition.id === 2018 || competition.id === 2019 || competition.id === 2021 ){
                     html = `
-                        <div class="col-3 mb-3">
+                        <div class="col s12 m6 l3 mb-3">
                             <div class="card">
                                 <a href="competition.html?id=${competition.id}">
-                                    <div class="card-body">
+                                    <div class="card-content">
                                         <p>${competition.name}</p>
                                     </div>
                                 </a>
@@ -80,18 +80,20 @@ function getCompetitionById(){
                         var button = "";
                         if(res){
                             button = `
-                            <button class="btn btn-danger">Favorite</button>
+                            <button class="btn red">Favorite</button>
                             `;
                         }else{
                             button = `
-                            <button class="btn btn-info" onclick="addFavorite(${team.team.id},'${team.team.name}')">+ Add to Favorite</button>
+                            <button class="btn teal" onclick="addFavorite(${team.team.id},'${team.team.name}')">+ Add to Favorite</button>
                             `;
                         }
                         html = `
-                        <div class="col-4 mb-3 text-center">
+                        <div class="col s12 m6 l3 mb-3">
                             <div class="card">
-                                <img class="card-img-top" src="${team.team.crestUrl ? team.team.crestUrl : ""}" alt="${team.team.name}">
-                                <div class="card-body">
+                                <div class="card-image">
+                                    <img src="${team.team.crestUrl ? team.team.crestUrl : ""}" alt="${team.team.name}">
+                                </div>
+                                <div class="card-content">
                                     <h4>${team.position}</h4>
                                     <p>${team.team.name}</p>
                                     ${button}
@@ -123,22 +125,24 @@ function getCompetitionById(){
                         var button = "";
                         if(res){
                             button = `
-                            <button class="btn btn-danger">Favorite</button>
+                            <button class="btn red">Favorite</button>
                             `;
                         }else{
                             button = `
-                            <button class="btn btn-info" onclick="addFavorite(${team.team.id},'${team.team.name}')">+ Add to Favorite</button>
+                            <button class="btn teal" onclick="addFavorite(${team.team.id},'${team.team.name}')">+ Add to Favorite</button>
                             `;
                         }
                         html = `
-                        <div class="col-4 mb-3 text-center">
+                        <div class="col s12 m6 l3 mb-3 text-center">
                             <div class="card">
-                                    <img class="card-img-top" src="${team.team.crestUrl ? team.team.crestUrl : ""}" alt="${team.team.name}">
-                                    <div class="card-body">
-                                        <h4>${team.position}</h4>
-                                        <p>${team.team.name}</p>
-                                        ${button}
-                                    </div>
+                                <div class="card-image">
+                                    <img src="${team.team.crestUrl ? team.team.crestUrl : ""}" alt="${team.team.name}">
+                                </div>
+                                <div class="card-content">
+                                    <h4>${team.position}</h4>
+                                    <p>${team.team.name}</p>
+                                    ${button}
+                                </div>
                             </div>
                         </div>
                     `;

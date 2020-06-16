@@ -11,7 +11,7 @@ function getFavorites(){
         return store.getAll();
     }).then(function(items){
         var html = `
-        <table class="table table-hover">
+        <table class="responsive-table">
         <tr>
             <th>No</th>
             <th>Name</th>
@@ -26,7 +26,7 @@ function getFavorites(){
                         <td>${no}</td>
                         <td>${item.name}</td>
                         <td>
-                            <button class="btn btn-danger" onclick="delFavorite(${item.id})">delete</button>
+                            <button class="btn red" onclick="delFavorite(${item.id})">delete</button>
                         </td>
                     </tr>
             `;
