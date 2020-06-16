@@ -17,7 +17,7 @@ var pushSubscription = {
 };
 var payload = 'Halo!! Kembali lagi dengan saya :)';
 var options = {
-    gcmAPIKey: '183001716870',
+    gcmAPIKey: '615953300937',
     TTL: 60
 };
 webPush.sendNotification(
