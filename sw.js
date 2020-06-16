@@ -1,7 +1,6 @@
 const CACHE_NAME = "football";
 const base_url = "https://api.football-data.org/v2/";
 
-
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js');
 
 if(workbox){
