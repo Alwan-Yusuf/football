@@ -1,66 +1,90 @@
 const CACHE_NAME = "football";
+const base_url = "https://api.football-data.org/v2/";
 
-var urlsToCache = [
-    '/index.html',
-    '/competitions.html',
-    '/competition.html',
-    '/favorite.html',
-    '/favicon.ico',
-    '/icon.png',
-    '/css/materialize.min.css',
-    '/js/materialize.min.js',
-    '/detail.html',
-    '/js/nav.js',
-    '/main.js',
-    '/idb.js',
-    '/db.js',
-    '/manifest.json',
-    '/js/api.js',
-    '/notif.js',
-];
 
-self.addEventListener("install",function(event){
-    event.waitUntil(
-        caches.open(CACHE_NAME).then(function(cache){
-            return cache.addAll(urlsToCache);
-        })
-    )
-})
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js');
 
-self.addEventListener("fetch", function(event) {
-    var base_url = "https://api.football-data.org/v2/";
-    if (event.request.url.indexOf(base_url) > -1) {
-      event.respondWith(
-        caches.open(CACHE_NAME).then(function(cache) {
-          return fetch(event.request).then(function(response) {
-            cache.put(event.request.url, response.clone());
-            return response;
-          })
-        })
-      );
-    } else {
-      event.respondWith(
-        caches.match(event.request).then(function(response) {
-          return response || fetch (event.request);
-        })
-      )
-    }
-  });
+if(workbox){
+  console.log('memuat workbox')
+}else{
+  console.log('workbox tidak dapat dimuat')
+}
 
-self.addEventListener("activate",function(event){
-    event.waitUntil(
-        caches.keys().then(function(cacheNames){
-            return Promise.all(
-                cacheNames.map(function(cacheName){
-                    if(cacheName !== CACHE_NAME){
-                        console.log("ServiceWorker: cache " + cacheName + " dihapus");
-                        return caches.delete(cacheName);
-                    }
-                })
-            )
-        })
-    )
-})
+workbox.routing.registerRoute(
+  new RegExp("/"),
+  workbox.strategies.staleWhileRevalidate({
+    cacheName:CACHE_NAME
+  })
+);
+
+workbox.routing.registerRoute(
+  new RegExp(base_url),
+  workbox.strategies.staleWhileRevalidate({
+    cacheName:"api"
+  })
+);
+
+// var urlsToCache = [
+//     '/index.html',
+//     '/competitions.html',
+//     '/competition.html',
+//     '/favorite.html',
+//     '/favicon.ico',
+//     '/icon.png',
+//     '/css/materialize.min.css',
+//     '/js/materialize.min.js',
+//     '/detail.html',
+//     '/js/nav.js',
+//     '/main.js',
+//     '/idb.js',
+//     '/db.js',
+//     '/manifest.json',
+//     '/js/api.js',
+//     '/notif.js',
+// ];
+
+// self.addEventListener("install",function(event){
+//     event.waitUntil(
+//         caches.open(CACHE_NAME).then(function(cache){
+//             return cache.addAll(urlsToCache);
+//         })
+//     )
+// })
+
+// self.addEventListener("fetch", function(event) {
+    
+//     if (event.request.url.indexOf(base_url) > -1) {
+//       event.respondWith(
+//         caches.open(CACHE_NAME).then(function(cache) {
+//           return fetch(event.request).then(function(response) {
+//             cache.put(event.request.url, response.clone());
+//             return response;
+//           })
+//         })
+//       );
+//     } else {
+//       event.respondWith(
+//         caches.match(event.request).then(function(response) {
+//           return response || fetch (event.request);
+//         })
+//       )
+//     }
+//   });
+
+// self.addEventListener("activate",function(event){
+//     event.waitUntil(
+//         caches.keys().then(function(cacheNames){
+//             return Promise.all(
+//                 cacheNames.map(function(cacheName){
+//                     if(cacheName !== CACHE_NAME){
+//                         console.log("ServiceWorker: cache " + cacheName + " dihapus");
+//                         return caches.delete(cacheName);
+//                     }
+//                 })
+//             )
+//         })
+//     )
+// })
 
 self.addEventListener('push', function(event) {
     var body;
